@@ -71,6 +71,21 @@ const createRequest = () => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
+                        <div v-if="$page.props.flash.message" class="fixed top-0 right-0 m-6">
+                            <div
+                                class="bg-yellow-200 text-black-900 rounded-lg shadow-md p-6 pr-10"
+                                style="min-width: 240px"
+                                >
+                                <button
+                                    class="opacity-75 cursor-pointer absolute top-0 right-0 py-2 px-3 hover:opacity-100"
+                                >
+                                    ×
+                                </button>
+                                <div class="flex items-center">
+                                    {{ $page.props.flash.message }}
+                                </div>
+                            </div>
+                        </div>
                         <Link href="requests/create"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Create New Post</button></Link>
                         <div class="p-6 text-gray-900">
                         <DataTable

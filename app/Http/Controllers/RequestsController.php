@@ -67,7 +67,7 @@ class RequestsController extends Controller
         $obj->save();
         $obj->details()->createMany($details);
 
-        return redirect()->route('requests.index');
+        return redirect()->route('requests.index')->with('message', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -119,6 +119,6 @@ class RequestsController extends Controller
     {
         $request->details()->delete();
         $request->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Data has been deleted');
     }
 }
