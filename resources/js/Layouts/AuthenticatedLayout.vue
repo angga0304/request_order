@@ -39,6 +39,24 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    :href="route('requests.index')"
+                                    :active="route().current('requests.index')"
+                                >
+                                    Permintaan Barang
+                                </NavLink>
+                                <NavLink
+                                    :href="route('employees.get')"
+                                    :active="route().current('employees.get')"
+                                >
+                                    Karyawan
+                                </NavLink>
+                                <NavLink
+                                    :href="route('items.get')"
+                                    :active="route().current('items.get')"
+                                >
+                                    Barang
+                                </NavLink>
                             </div>
                         </div>
 
@@ -145,6 +163,24 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('requests.index')"
+                            :active="route().current('requests.index')"
+                        >
+                            Permintaan Barang
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('employees.get')"
+                            :active="route().current('employees.get')"
+                        >
+                            Karyawan
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('items.get')"
+                            :active="route().current('items.get')"
+                        >
+                            Barang
                         </ResponsiveNavLink>
                     </div>
 

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ItemsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,5 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('requests', RequestsController::class)->middleware(['auth', 'verified']);
+Route::get('employees', [EmployeeController::class, 'index'])->name('employees.get')->middleware(['auth', 'verified']);
+Route::get('items', [ItemsController::class, 'index'])->name('items.get')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
