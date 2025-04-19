@@ -23,7 +23,8 @@ class StoreRequestRequest extends FormRequest
     {
         return [
             'date' => 'required',
-            'employee_id' => 'required'
+            'employee_id' => 'required',
+            'details' => 'required'
         ];
     }
 }
