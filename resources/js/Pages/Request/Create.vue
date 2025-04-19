@@ -21,6 +21,11 @@ defineProps({
 const employeeName = ref("");
 const employeeDept = ref("");
 const canSubmit = ref(false);
+const showerrors = reactive({
+    'employee': false,
+    'details': false,
+    'date': false,
+});
 
 const form = useForm({
   date: null,
@@ -41,11 +46,26 @@ const removeRow = (row) => {
     console.log(row);
     // const x = rows.indexOf(row);
     rows.splice(row,1);
+    if(rows.length < 1) {
+        canSubmit.value = false;
+    }
 };
 
 const createRequest = () => {
     form.details = rows;
-    form.post("/requests");
+    form.post("/requests", {
+        onError: (errors) => {
+            if(errors.employee_id) {
+                showerrors.employee = true;
+            }
+            if(errors.date) {
+                showerrors.date = true;
+            }
+            if(errors.details) {
+                showerrors.details = true;
+            }
+        }
+    });
 };
 
 const getEmployeeData = (employees, event) => {
@@ -64,7 +84,6 @@ const getItemData = (items, idx, event) => {
 }
 
 const checkAvailable = (row, event) => {
-    // const itemData = items[idx];
     const qty = event.target.value;
     const idx = rows.indexOf(row);
     rows[idx].qty = qty;
@@ -105,6 +124,7 @@ const checkAvailable = (row, event) => {
                                             {{ employee.nik }}
                                         </option>
                                     </select>
+                                    <span v-if="showerrors.employee" class="error text-red-800"> Input karyawan tidak boleh kosong</span>
                                 </div>
 
                                 <div class="mb-4 w-1/3 p-2">
@@ -138,10 +158,12 @@ const checkAvailable = (row, event) => {
                                     v-model="form.date"
                                     class="bg-gray shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                                     />
+                                    <span v-if="showerrors.date" class="error text-red-800"> Tanggal tidak boleh kosong</span>
                                 </div>
                             </div>
                             <div class="">
                                 <div class="font-bold">Daftar Barang</div><br>
+                                <span v-if="showerrors.details" class="error text-red-800"> Barang tidak boleh kosong</span>
                                 <div style="overflow-x: scroll;">
                                     <table class="table-auto border-separate border border-black text-sm" style="font-size: 14px !important;">
                                         <thead>
